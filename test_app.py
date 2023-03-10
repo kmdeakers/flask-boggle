@@ -36,7 +36,12 @@ class BoggleAppTestCase(TestCase):
 
     def test_api_new_game(self):
         """Test starting a new game."""
-
-        with self.client as client:
-            ...
             # write a test for this route
+        with self.client as client:
+            response = client.post('/api/new-game')
+            game_data = response.get_json()
+            # breakpoint()
+            print('response', response)
+            print('game_data', game_data)
+
+
