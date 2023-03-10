@@ -19,12 +19,20 @@ class BoggleAppTestCase(TestCase):
         app.config['TESTING'] = True
 
     def test_homepage(self):
-        """Make sure information is in the session and HTML is displayed"""
+        """Make sure correct HTML is rendered and displayed"""
 
         with self.client as client:
             response = client.get('/')
-            ...
+
             # test that you're getting a template
+            html = response.get_data(as_text = True)
+
+            #considered whole line for check, but considered if class name changes
+            #our code would have to be updated... mixing front end and backend EEK
+            #BUT if someone adds many tables???? which outweighs here
+            #can do ID or string to make sure it is the correct doc as well
+            self.assertIn('id="board-table"', html)
+            self.assertEqual(response.status_code, 200)
 
     def test_api_new_game(self):
         """Test starting a new game."""
