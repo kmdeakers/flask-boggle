@@ -27,5 +27,4 @@ def new_game():
     games[game_id] = game
 
     game_data = {"gameId": game_id, "board": game.board}
-    breakpoint()
     return jsonify(game_data)

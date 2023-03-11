@@ -36,12 +36,20 @@ class BoggleAppTestCase(TestCase):
 
     def test_api_new_game(self):
         """Test starting a new game."""
-            # write a test for this route
+        # write a test for this route
         with self.client as client:
             response = client.post('/api/new-game')
             game_data = response.get_json()
-            # breakpoint()
-            print('response', response)
-            print('game_data', game_data)
+            game_board = game_data['board']
+            game_id = game_data['gameId']
+
+            # checks is board is a list
+            self.assertTrue(isinstance(game_board, list))
+            # check is board is list of list
+            self.assertTrue(isinstance(game_board[0], list))
+            # check if game_id is string
+            self.assertTrue(isinstance(game_id, str))
+            #check if current game is in games dictionary
+            self.assertIn(game_id, games, "id not in games")
 
 
